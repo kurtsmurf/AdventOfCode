@@ -1,7 +1,7 @@
 // @ts-check
 import fs from "node:fs/promises";
 
-const input = await fs.readFile("input", "utf8");
+const input = await fs.readFile(import.meta.dirname + "/input", "utf8");
 
 // https://github.com/jelkand/aoc-2024/blob/main/lib/advent_of_code/day_02.ex
 

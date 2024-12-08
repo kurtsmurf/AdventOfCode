@@ -1,6 +1,6 @@
 import fs from "node:fs/promises"
 
-const input = await fs.readFile("input", "utf8");
+const input = await fs.readFile(import.meta.dirname + "/input", "utf8");
 
 const reports = input.trim().split("\n");
 
