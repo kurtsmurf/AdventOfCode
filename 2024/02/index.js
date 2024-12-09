@@ -36,3 +36,5 @@ function strictlyAscendingOrDescending(levels) {
 	}
 	return true;
 }
+
+// unfinished - see alt.js
