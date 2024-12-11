@@ -67,26 +67,25 @@ const test = (rule, update) => {
 }
 
 
-
-const part_1 = () => {
+// part 1
+{
     const results = updates
         .map(update => {
             const violation = rules.find(rule => !test(rule, update))
-            return { update, violation }
+            const middleLetter = update[Math.floor(update.length / 2)];
+            return { update, violation, middleLetter }
         })
 
-    const failed = results.filter(({ violation }) => violation);
+    const failed = results.filter((result) => result.violation);
 
     console.log("num failed:", failed.length)
-    console.log("total:", updates.length)
-
+    console.log("total:", results.length)
     
+    let sum = 0;
+    for (const {middleLetter} of failed) {
+        sum += parseInt(middleLetter)
+    }
 
-    // for (const update of updates) {
-    //     if (violatedRule !== undefined) {
-    //         console.log(violatedRule, update)
-    //     }
-    // }
+    console.log("Part 1:", sum)
 }
 
-part_1()
