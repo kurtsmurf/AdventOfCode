@@ -37,16 +37,56 @@ const rules = Array.from(input.matchAll(/\d\d\|\d\d/g))
 
 if (!rules) throw new Error("failed to parse rules")
 
-// console.log(rules.slice(0,10))
-// console.log(rules.slice(rules.length - 10, rules.length))
-
 const updates = Array.from(input.matchAll(/\d\d,(\d\d,?)+/g))
     .map(x => x[0])
+    .map(x => x.split(","))
 
 if (!updates) throw new Error("failed to parse updates")
 
-// console.log(updates?.slice(0,10))
-// console.log(updates?.slice(updates.length-10,updates.length))
+/**
+ * 
+ * @param {string} rule 
+ * @param {string[]} update 
+ * @returns {boolean}
+ */
+const test = (rule, update) => {
+    const [LL,RR] = rule.split("|")
+
+    // rule followed if neither pageNum is in the update
+    if (!update.includes(LL) || !update.includes(RR)) return true
+
+    // find first instance of RR
+    const index = update.indexOf(RR)
+
+    // split array at that index
+    const after = update.slice(index + 1);
+
+    // rule followed if after part doesn't have LL
+    return !after.includes(LL);
+
+}
 
 
 
+const part_1 = () => {
+    const results = updates
+        .map(update => {
+            const violation = rules.find(rule => !test(rule, update))
+            return { update, violation }
+        })
+
+    const failed = results.filter(({ violation }) => violation);
+
+    console.log("num failed:", failed.length)
+    console.log("total:", updates.length)
+
+    
+
+    // for (const update of updates) {
+    //     if (violatedRule !== undefined) {
+    //         console.log(violatedRule, update)
+    //     }
+    // }
+}
+
+part_1()
