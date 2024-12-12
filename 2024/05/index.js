@@ -63,9 +63,7 @@ const test = (rule, update) => {
 
     // rule followed if after part doesn't have LL
     return !after.includes(LL);
-
 }
-
 
 // part 1
 {
@@ -76,13 +74,10 @@ const test = (rule, update) => {
             return { update, violation, middleLetter }
         })
 
-    const failed = results.filter((result) => result.violation);
-
-    console.log("num failed:", failed.length)
-    console.log("total:", results.length)
+    const succeeded = results.filter((result) => !result.violation)
     
     let sum = 0;
-    for (const {middleLetter} of failed) {
+    for (const {middleLetter} of succeeded) {
         sum += parseInt(middleLetter)
     }
 
